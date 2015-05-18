@@ -1,7 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from books import views
 
-urlpatterns = patterns('',
+urlpatterns = [
    url(r'^$', views.BooksModelView.as_view(), name = 'index'),
 
    url(r'^book/$', views.BookList.as_view(), name = 'book_list'),
@@ -12,4 +12,4 @@ urlpatterns = patterns('',
    url(r'^author/(?P<pk>\d+)/$', views.AuthorDetail.as_view(), name = 'author_detail'),
    url(r'^publisher/(?P<pk>\d+)/$', views.PublisherDetail.as_view(), name = "publisher_detail"),
 
-)
+]

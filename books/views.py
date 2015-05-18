@@ -9,7 +9,7 @@ from books.models import Book, Author, Publisher
 class BooksModelView(TemplateView) :
     template_name = 'books/index.html'
 
-    def get_context_date(self, **kwargs):
+    def get_context_data(self, **kwargs):
         context = super(BooksModelView, self).get_context_data(**kwargs)
         context['object_list'] = ['Book', 'Author', 'Publisher']
         return context
