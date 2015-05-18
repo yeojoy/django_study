@@ -8,6 +8,10 @@ from django.views.generic import ListView, DetailView
 
 from polls.models import Choice, Question
 
+#logging
+import logging
+logger = logging.getLogger(__name__)
+
 #--- Class-based GenericView ---#
 class IndexView(ListView):
     template_name = 'polls/index.html'
@@ -26,6 +30,7 @@ class ResultsView(DetailView) :
     template_name = 'polls/results.html'
 
 def vote(request, pk):
+    logger.debug("call vote(), with choice's pk, pk is %s", pk)
     p = get_object_or_404(Question, pk=pk)
     try:
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
@@ -36,6 +41,7 @@ def vote(request, pk):
             'error_message': "You didn't select a choice.",
         })
     else:
+        logger.info("finish to vote.")
         selected_choice.votes += 1
         selected_choice.save()
         # Always return an HttpResponseRedirect after successfully dealing
